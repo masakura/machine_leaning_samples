@@ -1,0 +1,39 @@
+#----------------------------------------
+# purpose: kerasによる非線形回帰問題の学習結果を利用した予測
+# author: Katsuhiro MORISHITA　森下功啓
+# memo: 読み込むデータは、1行目に列名があること。なお、正解値は含まないこと（全列説明変数）。
+# created: 2017-07-20
+#----------------------------------------
+import pandas
+import pickle
+import numpy as np
+from sklearn import preprocessing # 次元毎の正規化に使う
+from keras.models import model_from_json
+
+
+def ndarray2str(val):
+	""" ndarray型の変数を文字列に変換する
+	val: ndarray 2次元配列を仮定
+	"""
+	out = []
+	for x in val:
+		temp = [str(y) for y in x]
+		out.append(",".join(temp))
+	return "\n".join(out)
+
+
+# データの読み込み
+df = pandas.read_csv("prediction_data.csv")
+s = len(df.columns)
+x = (df.iloc[:, :]).values # ndarrayに変換
+y = (df.iloc[:, :]).values
+
+# 機械学習器を復元
+model = model_from_json(open('model', 'r').read())
+model.load_weights('param.hdf5')
+
+# テスト用のデータを保存
+with open("result.csv", "w") as fw:
+	test = model.predict(x)
+	print(test)
+	fw.write(ndarray2str(test))
