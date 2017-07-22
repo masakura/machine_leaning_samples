@@ -1,6 +1,7 @@
 #----------------------------------------
 # purpose: kerasによる非線形回帰問題の学習テスト
-# もし特徴量の間に
+# memo: fit()の引数のvalidation_dataを使えばfitを小刻みに行わなくても良いことに気がついたが、
+#       fitを抜ける度に学習データにに何かするならそのまま使えるかもということで、このまま保存する。
 # author: Katsuhiro MORISHITA　森下功啓
 # created: 2017-07-20
 #----------------------------------------
@@ -17,7 +18,7 @@ import matplotlib.pyplot as plt
 
 def read_data(fname, ratio=0.8):
 	""" データの読み込み
-	ratio: 
+	ratio: 学習に使うデータの割合
 	"""
 	df = pandas.read_csv(fname)
 	df = df.reindex(np.random.permutation(df.index)).reset_index(drop=True) # ランダムに並べ替える（効果高い）
@@ -54,6 +55,7 @@ epochs = 10 # 1回の学習ループでの、1つのデータ当たりの学習�
 batch_size = 50
 loss_train = []
 loss_test = []
+epoch = 0
 for i in range(times):
 	# 学習
 	model.fit(x_train, y_train, epochs=epochs, batch_size=batch_size, verbose=1) # ephochsは誤差の収束状況を見て調整のこと
@@ -74,7 +76,7 @@ test = model.predict(x_test)
 plt.scatter(y_test, test, c="b", marker="^") # グラフを描画する
 plt.show()
 
-# 誤差と精度をグラフで保存
+# 誤差をグラフで保存
 plt.clf()
 plt.plot(np.arange(times) * epochs, loss_train, c="b", label="loss of train")
 plt.plot(np.arange(times) * epochs, loss_test, c="r", label="loss of test")
