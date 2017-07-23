@@ -26,7 +26,6 @@ def ndarray2str(val):
 df = pandas.read_csv("prediction_data.csv")
 s = len(df.columns)
 x = (df.iloc[:, :]).values # ndarrayに変換
-y = (df.iloc[:, :]).values
 
 # 機械学習器を復元
 model = model_from_json(open('model', 'r').read())
