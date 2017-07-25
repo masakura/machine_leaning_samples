@@ -23,8 +23,8 @@ def read_data(fname, ratio=0.8):
 	df = pandas.read_csv(fname)
 	df = df.reindex(np.random.permutation(df.index)).reset_index(drop=True) # ランダムに並べ替える（効果高い）
 	s = len(df.columns)
-	x = (df.iloc[:, 0:s-1]).values # ndarrayに変換
-	y = (df.iloc[:, s-1:s]).values
+	x = (df.iloc[:, :-1]).values # ndarrayに変換
+	y = (df.iloc[:, -1:]).values # 最後の列が正解データ
 	print("x", x)
 	print("y", y)
 	p = int(ratio * len(df))
