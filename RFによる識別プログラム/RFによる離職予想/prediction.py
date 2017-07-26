@@ -12,8 +12,8 @@ import numpy as np
 # データの読み込み
 data = pandas.read_csv("HR_comma_sep_test.csv")
 #print(data)
-trainFeature = (data.iloc[:, 0:9]).values # transform to ndarray
-trainLabel = (data.iloc[:, 9:10]).values
+trainFeature = (data.iloc[:, :-1]).values # transform to ndarray
+trainLabel = (data.iloc[:, -1:]).values
 trainLabel = np.ravel(trainLabel) # transform 2次元 to 1次元 ぽいこと
 
 # 機械学習器を復元

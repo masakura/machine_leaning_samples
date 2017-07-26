@@ -15,8 +15,8 @@ import numpy as np
 data = pandas.read_csv("iris_learning.csv")
 #print(data)
 s = len(data.columns) # 列数の取得
-trainFeature = (data.iloc[:, 0:s-1]).values # transform to ndarray
-trainLabel = (data.iloc[:, s-1:s]).values
+trainFeature = (data.iloc[:, :-1]).values # transform to ndarray
+trainLabel = (data.iloc[:, -1:]).values
 trainLabel = np.ravel(trainLabel) # transform 2次元 to 1次元 ぽいこと
 
 # 学習
