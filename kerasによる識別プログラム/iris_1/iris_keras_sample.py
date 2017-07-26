@@ -19,7 +19,7 @@ def build_multilayer_perceptron():
     model.add(Activation('softmax'))
     return model
 
-if __name__ == "__main__":
+def main():
     # Irisデータをロード
     iris = datasets.load_iris()
     X = iris.data
@@ -53,5 +53,9 @@ if __name__ == "__main__":
     # モデル評価
     loss, accuracy = model.evaluate(test_X, test_Y, verbose=0)
     print("Accuracy = {:.2f}".format(accuracy))
+
+
+if __name__ == "__main__":
+    main()
 
 
