@@ -27,6 +27,6 @@ with open('label_dict.pickle', 'rb') as f:
 # テスト用のデータを保存
 with open("test_result.csv", "w") as fw:
 	test = model.predict_classes(x)
-	test = [str(label_dict[x]) for x in test] # 文字列に変更（ラベルが数値だった場合に有効）
+	test = [str(label_dict[x]) for x in test] # 出力をラベルに変更（ラベルが文字列だった場合に便利だし、str.join(list)が使えて便利）
 	print(test)
 	fw.write("{0}\n".format("\n".join(test)))
