@@ -33,12 +33,12 @@ class scaler:
 			df = pd.DataFrame(index=self._std.index.values)
 			df["std"] = self._std
 			df["mean"] = self._mean
-			df.to_csv("param")
+			df.to_csv("sc_param")
 
 	def load(self):
 		""" 保存されていた平均や標準偏差を読み込む
 		"""
-		df = pd.read_csv("param", index_col=0)
+		df = pd.read_csv("sc_param", index_col=0)
 		self._std = df["std"]
 		self._mean = df["mean"]
 
