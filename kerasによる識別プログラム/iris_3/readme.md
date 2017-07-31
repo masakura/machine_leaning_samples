@@ -11,22 +11,21 @@ iris2に対して、記述を関数化して、検証結果を集計する機能
 
 サンプルとして用意しているiris_test.csvから削除した正解ラベルは以下の通りです。
 learning.pyを実行した後にprediction.pyを実行して以下を得ることができれば成功です。
-===============
-kind
-0: setosa
-0
-0
-0
-0
-0
-1: versicolor
-1
-1
-1
-1
-2: virginica
-2
-2
-2
-2
-===============
+
+kind  
+0: setosa  
+0  
+0  
+0  
+0  
+0  
+1: versicolor  
+1  
+1  
+1  
+1  
+2: virginica  
+2  
+2  
+2  
+2  
