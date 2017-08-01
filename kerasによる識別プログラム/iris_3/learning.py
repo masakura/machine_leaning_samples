@@ -160,7 +160,7 @@ def main():
 	# 学習
 	epochs = 150 # 1つのデータ当たりの学習回数
 	batch_size = 5
-	history = model.fit(x_train, y_train, 
+	history = model.fit(x_train, y_train, # クラス間の学習に重みを掛けた方が良いかも
 		epochs=epochs, 
 		batch_size=batch_size, 
 		verbose=1, 
