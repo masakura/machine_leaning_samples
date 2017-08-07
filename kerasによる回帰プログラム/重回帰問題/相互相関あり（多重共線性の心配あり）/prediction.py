@@ -26,8 +26,8 @@ def ndarray2str(val):
 # データの読み込み
 df = pandas.read_csv("regression_test.csv")
 s = len(df.columns)
-x = (df.iloc[:, 0:s-1]).values # ndarrayに変換
-y = (df.iloc[:, s-1:s]).values
+x = (df.iloc[:, :-1]).values # ndarrayに変換
+y = (df.iloc[:, -1:]).values
 
 # 機械学習器を復元
 model = model_from_json(open('model', 'r').read())

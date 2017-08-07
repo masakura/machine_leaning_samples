@@ -19,8 +19,8 @@ from sklearn import preprocessing # 次元毎の正規化に使う
 df = pandas.read_csv("regression_learning.csv")
 df = df.reindex(np.random.permutation(df.index)).reset_index(drop=True) # ランダムに並べ替える（効果高い）
 s = len(df.columns)
-x = (df.iloc[:, 0:s-1]).values # ndarrayに変換
-y = (df.iloc[:, s-1:s]).values
+x = (df.iloc[:, :-1]).values # ndarrayに変換
+y = (df.iloc[:, -1:]).values
 print("x", x)
 print("y", y)
 
