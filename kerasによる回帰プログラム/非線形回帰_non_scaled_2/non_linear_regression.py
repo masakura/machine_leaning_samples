@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 
 def read_data(fname, ratio=0.8):
 	""" データの読み込み
-	ratio: 
+	ratio: float, 学習に使うデータの割合
 	"""
 	df = pandas.read_csv(fname)
 	df = df.reindex(np.random.permutation(df.index)).reset_index(drop=True) # ランダムに並べ替える（効果高い）
