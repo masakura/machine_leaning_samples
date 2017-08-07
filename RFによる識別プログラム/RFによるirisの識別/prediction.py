@@ -26,6 +26,6 @@ with open('entry.pickle', 'rb') as f:  # 学習成果を読み出す
 # 検証と
 with open("test_result.csv", "w") as fw:
 	test = clf.predict(trainFeature)
-	test = [str(x) for x in test] # 文字列に変更（ラベルが数値だった場合に有効）
+	test = [str(x) for x in test] # 要素を文字列に変更（ラベルが数値だった場合に有効）
 	print(test)
 	fw.write("{0}\n".format("\n".join(test)))
