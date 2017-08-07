@@ -75,6 +75,19 @@ def to_vector(label_array):
 	return (vectors, label_dict)
 
 
+def get_class_weights(y, lavel_dict):
+	""" 学習（訓練）データに含まれる正解ラベルの割合からクラスの重みを計算して返す
+	y: 2D ndarray, ラベルの格納された1列だけで構成されたndarray
+	lavel_dict: dict, predict_classes()が返す数値（クラス番号）をラベルに変換する辞書
+	"""
+	labels = list(np.ravel(y))
+	majority = max([labels.count(lavel_dict[key]) for key in lavel_dict])
+	class_weight = {key:majority/labels.count(lavel_dict[key]) for key in lavel_dict}
+	print("--class waights--", class_weight)
+	return class_weight
+
+
+
 def build_model(input_dim, output_dim):
 	""" 機械学習のモデルを作成する
 	"""
@@ -154,19 +167,23 @@ def main():
 	with open('label_dict.pickle', 'wb') as f: # 再利用のために、ファイルに保存しておく
 		pickle.dump(label_dict, f)
 
+	# 重みを計算
+	class_weight = get_class_weights(y_train_o, label_dict)
+
 	# 学習器の準備
 	model = build_model(s-1, len(y_train[0]))
 
 	# 学習
 	epochs = 150 # 1つのデータ当たりの学習回数
 	batch_size = 5
-	history = model.fit(x_train, y_train, # クラス間の学習に重みを掛けた方が良いかも
+	history = model.fit(x_train, y_train,
 		epochs=epochs, 
 		batch_size=batch_size, 
 		verbose=1, 
 		validation_split=0.1,
 		validation_data=(x_test, y_test), # validation_dataをセットするとvalidation_splitは無視される
-		shuffle=True,
+		shuffle=True, # 1epoch毎にデータをシャッフル
+		class_weight=class_weight
 		) # 返り値には、学習中のlossやaccなどが格納される（metricsに指定する必要がある）
 
 	# 学習のチェック

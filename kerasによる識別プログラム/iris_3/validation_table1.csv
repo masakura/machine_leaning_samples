@@ -1,4 +1,4 @@
 ,setosa,versicolor,virginica
-setosa,7,0,0
-versicolor,0,10,1
-virginica,0,0,9
+setosa,10,0,0
+versicolor,0,9,0
+virginica,0,2,6
