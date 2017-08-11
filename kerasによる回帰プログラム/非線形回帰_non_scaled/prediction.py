@@ -5,9 +5,6 @@
 # created: 2017-07-20
 #----------------------------------------
 import pandas
-import pickle
-import numpy as np
-from sklearn import preprocessing # 次元毎の正規化に使う
 from keras.models import model_from_json
 
 
@@ -21,18 +18,18 @@ def ndarray2str(val):
 		out.append(",".join(temp))
 	return "\n".join(out)
 
-
 # データの読み込み
 df = pandas.read_csv("prediction_data.csv")
 s = len(df.columns)
-x = (df.iloc[:, :]).values # ndarrayに変換
+x = (df.iloc[:, :]).values # ndarrayに変換。全データが説明変数ならたぶんdf.valuesでもいいと思うが、たまには列指定したいかもしれないのでilocのままとする。
 
 # 機械学習器を復元
 model = model_from_json(open('model', 'r').read())
 model.load_weights('param.hdf5')
 
 # テスト用のデータを保存
-with open("result.csv", "w") as fw:
-	test = model.predict(x)
-	print(test)
-	fw.write(ndarray2str(test))
+with open("prediction_result.csv", "w") as fw:
+	prediciton_data = model.predict(x)
+	print(prediciton_data)
+	fw.write(ndarray2str(prediciton_data))
+
