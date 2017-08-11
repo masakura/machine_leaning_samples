@@ -4,13 +4,9 @@
 # created: 2017-07-10
 #----------------------------------------
 import numpy as np
-import pandas
-import pickle
 import keras
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, advanced_activations, Activation
-from keras.utils import np_utils
-from sklearn import preprocessing # 次元毎の正規化に使う
 import matplotlib.pyplot as plt
 
 
@@ -29,13 +25,13 @@ model.add(Dense(1))
 opt = keras.optimizers.Adam(lr=0.05, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0003) # 学習係数を大きめに取っている
 model.compile(optimizer=opt,
       loss='mean_squared_error',
-      metrics=['mae'])
+      metrics=['mae']) # mean_absolute_percentage_error 
 
 
 times = 10
 epochs = 120
 loss_array = []
-acc_array = []
+mae_array = []
 for i in range(times):
 	# 学習
 	model.fit(x, y, epochs=epochs, batch_size=10, verbose=1) # ephochsは誤差の収束状況を見て調整のこと
@@ -46,9 +42,9 @@ for i in range(times):
 	model.save_weights('param_{0}.hdf5'.format(i))
 
 	# 学習状況を確認
-	loss, accuracy = model.evaluate(x, y, verbose=0)
+	loss, mae = model.evaluate(x, y, verbose=0)
 	loss_array.append(loss)
-	acc_array.append(accuracy)
+	mae_array.append(mae)
 
 	# 学習状況の検証のためのグラフの作成と保存
 	test = model.predict(x)
@@ -60,8 +56,8 @@ for i in range(times):
 # 誤差と精度をグラフで保存
 plt.clf()
 plt.plot(np.arange(times) * epochs, loss_array, c="b", label="loss")
-plt.plot(np.arange(times) * epochs, acc_array, c="r", label="accuracy")
+plt.plot(np.arange(times) * epochs, mae_array, c="r", label="mae")
 plt.legend() # 凡例の表示
 plt.xlabel("ephochs")
-plt.ylabel("loss or accuracy")
-plt.savefig("loss_acc.png")
+plt.ylabel("loss or mae")
+plt.savefig("loss_mae.png")
