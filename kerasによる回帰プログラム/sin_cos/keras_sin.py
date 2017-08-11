@@ -4,13 +4,9 @@
 # created: 2017-07-10
 #----------------------------------------
 import numpy as np
-import pandas
-import pickle
 import keras
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, advanced_activations, Activation
-from keras.utils import np_utils
-from sklearn import preprocessing # 次元毎の正規化に使う
 import matplotlib.pyplot as plt
 
 
