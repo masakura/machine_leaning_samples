@@ -7,7 +7,7 @@
 #----------------------------------------
 import pandas
 import pickle
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier as ml
 import numpy as np
 
 
@@ -15,21 +15,21 @@ import numpy as np
 data = pandas.read_csv("iris_learning.csv")
 #print(data)
 s = len(data.columns) # 列数の取得
-trainFeature = (data.iloc[:, :-1]).values # transform to ndarray
-trainLabel = (data.iloc[:, -1:]).values
-trainLabel = np.ravel(trainLabel) # transform 2次元 to 1次元 ぽいこと
+x = (data.iloc[:, :-1]).values # transform to ndarray
+y = (data.iloc[:, -1:]).values
+y = np.ravel(y) # transform 2次元 to 1次元 ぽいこと
 
 # 学習
-clf = RandomForestClassifier()               # 学習器
-clf.fit(trainFeature, trainLabel)
-result = clf.score(trainFeature, trainLabel) # 学習データに対する、適合率
+clf = ml()               # 学習器
+clf.fit(x, y)
+result = clf.score(x, y) # 学習データに対する、適合率
 
 # 学習済みの学習器を保存
 with open('entry.pickle', 'wb') as f:
 	pickle.dump(clf, f)
 
 # 結果の確認
-test = clf.predict([trainFeature[0]]) # 1個だけテスト
+test = clf.predict([x[0]]) # 1個だけテスト
 print(test)
 print(result) # 学習データに対する適合率
 print(clf.feature_importances_)	# 各特徴量に対する寄与度を求める
