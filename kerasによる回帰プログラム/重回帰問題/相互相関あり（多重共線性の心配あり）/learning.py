@@ -7,12 +7,9 @@
 #----------------------------------------
 import numpy as np
 import pandas
-import pickle
 import keras
 from keras.models import Sequential
 from keras.layers import Dense, Dropout
-from keras.utils import np_utils
-from sklearn import preprocessing # 次元毎の正規化に使う
 
 
 # データの読み込み
@@ -23,7 +20,6 @@ x = (df.iloc[:, :-1]).values # ndarrayに変換
 y = (df.iloc[:, -1:]).values
 print("x", x)
 print("y", y)
-
 
 # 学習器の準備
 model = Sequential()

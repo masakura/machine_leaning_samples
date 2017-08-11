@@ -6,9 +6,6 @@
 # created: 2017-07-08
 #----------------------------------------
 import pandas
-import pickle
-import numpy as np
-from sklearn import preprocessing # 次元毎の正規化に使う
 from keras.models import model_from_json
 
 
@@ -26,8 +23,7 @@ def ndarray2str(val):
 # データの読み込み
 df = pandas.read_csv("regression_test.csv")
 s = len(df.columns)
-x = (df.iloc[:, 0:s-1]).values # ndarrayに変換
-y = (df.iloc[:, s-1:s]).values
+x = (df.iloc[:, :-1]).values # ndarrayに変換
 
 # 機械学習器を復元
 model = model_from_json(open('model', 'r').read())
