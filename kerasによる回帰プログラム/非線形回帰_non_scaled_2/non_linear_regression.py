@@ -14,22 +14,22 @@ import matplotlib.pyplot as plt
 
 
 def read_data(fname, ratio=0.8):
-	""" データの読み込み
-	ratio: float, 学習に使うデータの割合
-	"""
-	df = pandas.read_csv(fname)
-	df = df.reindex(np.random.permutation(df.index)).reset_index(drop=True) # ランダムに並べ替える（効果高い）
-	s = len(df.columns)
-	x = (df.iloc[:, :-1]).values # ndarrayに変換
-	y = (df.iloc[:, -1:]).values # 最後の列が正解データ
-	print("x", x)
-	print("y", y)
-	p = int(ratio * len(df))
-	x_train = x[:p] # 学習に使うデータ
-	y_train = y[:p]
-	x_test = x[p:] # 検証に使うデータ
-	y_test = y[p:]
-	return x_train, y_train, x_test, y_test, s
+    """ データの読み込み
+    ratio: float, 学習に使うデータの割合
+    """
+    df = pandas.read_csv(fname)
+    df = df.reindex(np.random.permutation(df.index)).reset_index(drop=True) # ランダムに並べ替える（効果高い）
+    s = len(df.columns)
+    x = (df.iloc[:, :-1]).values # ndarrayに変換
+    y = (df.iloc[:, -1:]).values # 最後の列が正解データ
+    print("x", x)
+    print("y", y)
+    p = int(ratio * len(df))
+    x_train = x[:p] # 学習に使うデータ
+    y_train = y[:p]
+    x_test = x[p:] # 検証に使うデータ
+    y_test = y[p:]
+    return x_train, y_train, x_test, y_test, s
 
 # データ読み込み
 x_train, y_train, x_test, y_test, s = read_data("regression_learning.csv")
@@ -50,13 +50,13 @@ model.compile(optimizer=opt,
 epochs = 200 # 1つのデータ当たりの学習回数
 batch_size = 50
 history = model.fit(x_train, y_train, 
-	epochs=epochs, 
-	batch_size=batch_size, 
-	verbose=1, 
-	validation_split=0.1,
-	validation_data=(x_test, y_test), # validation_dataをセットするとvalidation_splitは無視される
-	shuffle=True,
-	) # 返り値には、学習中のlossやaccなどが格納される（metricsに指定する必要がある）
+    epochs=epochs, 
+    batch_size=batch_size, 
+    verbose=1, 
+    validation_split=0.1,
+    validation_data=(x_test, y_test), # validation_dataをセットするとvalidation_splitは無視される
+    shuffle=True,
+    ) # 返り値には、学習中のlossやaccなどが格納される（metricsに指定する必要がある）
 
 # 学習結果を保存
 print(model.summary()) # レイヤー情報を表示(上で表示させると流れるので)
@@ -70,18 +70,18 @@ plt.show()
 
 # 学習のlossの変化をplot
 def plot_history(history):
-	""" 損失の履歴をプロット
-	from http://www.procrasist.com/entry/2017/01/07/154441
-	"""
-	plt.plot(history.history['loss'],"o-",label="loss",)
-	plt.plot(history.history['val_loss'],"^-",label="val_loss")
-	plt.title('model loss')
-	plt.xlabel('epoch')
-	plt.ylabel('loss')
-	plt.legend(loc='lower right')
-	plt.grid(which="both")
-	plt.yscale("log") # ケースバイケースでコメントアウト
-	plt.show()
+    """ 損失の履歴をプロット
+    from http://www.procrasist.com/entry/2017/01/07/154441
+    """
+    plt.plot(history.history['loss'],"o-",label="loss",)
+    plt.plot(history.history['val_loss'],"^-",label="val_loss")
+    plt.title('model loss')
+    plt.xlabel('epoch')
+    plt.ylabel('loss')
+    plt.legend(loc='lower right')
+    plt.grid(which="both")
+    plt.yscale("log") # ケースバイケースでコメントアウト
+    plt.show()
 
 #print(history.history)
 plot_history(history)

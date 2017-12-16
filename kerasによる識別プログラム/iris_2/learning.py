@@ -27,14 +27,14 @@ print("y", y)
 # 正解ラベルを01のリストを作成
 labels = np.ravel(y) # 出力をラベルに変換するための布石
 if y.dtype == "object":  # ラベルが文字列かチェック
-	vec = DictVectorizer()
-	y = vec.fit_transform([{"class":mem[0]} for mem in y]).toarray() # 判別問題における文字列による正解ラベルをベクトル化する
+    vec = DictVectorizer()
+    y = vec.fit_transform([{"class":mem[0]} for mem in y]).toarray() # 判別問題における文字列による正解ラベルをベクトル化する
 else:
-	y = np_utils.to_categorical(y)
+    y = np_utils.to_categorical(y)
 print("y", y)
 label_dict = {list(y[i]).index(y[i].max()):labels[i] for i in range(len(labels))} # 出力をラベルに変換する辞書
 with open('label_dict.pickle', 'wb') as f:
-	pickle.dump(label_dict, f)
+    pickle.dump(label_dict, f)
 
 # 学習器の準備
 model = Sequential()
@@ -55,7 +55,7 @@ model.fit(x, y, epochs=500, batch_size=batch_size, verbose=1) # nb_epochは古�
 result = model.predict_classes(x, batch_size=batch_size, verbose=0) # クラス推定
 print("result1: ", result)
 for mem in result:
-	print("label convert test,", mem, label_dict[mem])
+    print("label convert test,", mem, label_dict[mem])
 result = model.predict(x, batch_size=batch_size, verbose=0) # 各ユニットの出力を見る
 print("result2: ", result)
 result = model.predict_proba(x, batch_size=batch_size, verbose=0) # 確率を出す（softmaxを使っているので、predictと同じ出力になる）

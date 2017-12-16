@@ -33,25 +33,25 @@ epochs = 120
 loss_array = []
 mae_array = []
 for i in range(times):
-	# 学習
-	model.fit(x, y, epochs=epochs, batch_size=10, verbose=1) # ephochsは誤差の収束状況を見て調整のこと
+    # 学習
+    model.fit(x, y, epochs=epochs, batch_size=10, verbose=1) # ephochsは誤差の収束状況を見て調整のこと
 
-	# 学習結果を保存
-	print(model.summary()) # レイヤー情報を表示(上で表示させると流れるので)
-	open("model_{0}".format(i), "w").write(model.to_json())
-	model.save_weights('param_{0}.hdf5'.format(i))
+    # 学習結果を保存
+    print(model.summary()) # レイヤー情報を表示(上で表示させると流れるので)
+    open("model_{0}".format(i), "w").write(model.to_json())
+    model.save_weights('param_{0}.hdf5'.format(i))
 
-	# 学習状況を確認
-	loss, mae = model.evaluate(x, y, verbose=0)
-	loss_array.append(loss)
-	mae_array.append(mae)
+    # 学習状況を確認
+    loss, mae = model.evaluate(x, y, verbose=0)
+    loss_array.append(loss)
+    mae_array.append(mae)
 
-	# 学習状況の検証のためのグラフの作成と保存
-	test = model.predict(x)
-	plt.clf()
-	plt.plot(x, test, c="b")
-	plt.plot(x, y, c="r")
-	plt.savefig("graph_{0}.png".format(i))
+    # 学習状況の検証のためのグラフの作成と保存
+    test = model.predict(x)
+    plt.clf()
+    plt.plot(x, test, c="b")
+    plt.plot(x, y, c="r")
+    plt.savefig("graph_{0}.png".format(i))
 
 # 誤差と精度をグラフで保存
 plt.clf()

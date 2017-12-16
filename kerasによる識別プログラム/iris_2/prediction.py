@@ -22,11 +22,11 @@ model.load_weights('param.hdf5')
 # 出力をラベルに変換する辞書を復元
 label_dict = None
 with open('label_dict.pickle', 'rb') as f:
-	label_dict = pickle.load(f)        # オブジェクト復元
+    label_dict = pickle.load(f)        # オブジェクト復元
 
 # テスト用のデータを保存
 with open("test_result.csv", "w") as fw:
-	test = model.predict_classes(x)
-	test = [str(label_dict[x]) for x in test] # 出力をラベルに変換（ラベルが文字列だった場合に便利だし、str.join(list)が使えて便利）
-	print(test)
-	fw.write("{0}\n".format("\n".join(test)))
+    test = model.predict_classes(x)
+    test = [str(label_dict[x]) for x in test] # 出力をラベルに変換（ラベルが文字列だった場合に便利だし、str.join(list)が使えて便利）
+    print(test)
+    fw.write("{0}\n".format("\n".join(test)))

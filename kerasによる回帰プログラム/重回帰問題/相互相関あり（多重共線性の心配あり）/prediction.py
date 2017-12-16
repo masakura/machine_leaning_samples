@@ -10,14 +10,14 @@ from keras.models import model_from_json
 
 
 def ndarray2str(val):
-	""" ndarray型の変数を文字列に変換する
-	val: ndarray 2次元配列を仮定
-	"""
-	out = []
-	for x in val:
-		temp = [str(y) for y in x]
-		out.append(",".join(temp))
-	return "\n".join(out)
+    """ ndarray型の変数を文字列に変換する
+    val: ndarray 2次元配列を仮定
+    """
+    out = []
+    for x in val:
+        temp = [str(y) for y in x]
+        out.append(",".join(temp))
+    return "\n".join(out)
 
 
 # データの読み込み
@@ -31,6 +31,6 @@ model.load_weights('param.hdf5')
 
 # テスト用のデータを保存
 with open("test_result.csv", "w") as fw:
-	test = model.predict(x)
-	print(test)
-	fw.write(ndarray2str(test))
+    test = model.predict(x)
+    print(test)
+    fw.write(ndarray2str(test))

@@ -14,22 +14,22 @@ import matplotlib.pyplot as plt
 
 
 def read_data(fname, ratio=0.8):
-	""" データの読み込み
-	ratio: float, 学習に使うデータの割合
-	"""
-	df = pandas.read_csv(fname)
-	df = df.reindex(np.random.permutation(df.index)).reset_index(drop=True) # ランダムに並べ替える（効果高い）
-	s = len(df.columns)
-	x = (df.iloc[:, :-1]).values # ndarrayに変換
-	y = (df.iloc[:, -1:]).values # 最後の列が正解データ
-	print("x", x)
-	print("y", y)
-	p = int(ratio * len(df))
-	x_train = x[:p] # 学習に使うデータ
-	y_train = y[:p]
-	x_test = x[p:] # 検証に使うデータ
-	y_test = y[p:]
-	return x_train, y_train, x_test, y_test, s
+    """ データの読み込み
+    ratio: float, 学習に使うデータの割合
+    """
+    df = pandas.read_csv(fname)
+    df = df.reindex(np.random.permutation(df.index)).reset_index(drop=True) # ランダムに並べ替える（効果高い）
+    s = len(df.columns)
+    x = (df.iloc[:, :-1]).values # ndarrayに変換
+    y = (df.iloc[:, -1:]).values # 最後の列が正解データ
+    print("x", x)
+    print("y", y)
+    p = int(ratio * len(df))
+    x_train = x[:p] # 学習に使うデータ
+    y_train = y[:p]
+    x_test = x[p:] # 検証に使うデータ
+    y_test = y[p:]
+    return x_train, y_train, x_test, y_test, s
 
 # データ読み込み
 x_train, y_train, x_test, y_test, s = read_data("regression_learning.csv")
@@ -54,14 +54,14 @@ loss_train = []
 loss_test = []
 epoch = 0
 for i in range(times):
-	# 学習
-	model.fit(x_train, y_train, epochs=epochs, batch_size=batch_size, verbose=1) # ephochsは誤差の収束状況を見て調整のこと
+    # 学習
+    model.fit(x_train, y_train, epochs=epochs, batch_size=batch_size, verbose=1) # ephochsは誤差の収束状況を見て調整のこと
 
-	# 学習状況を確認
-	loss, accuracy = model.evaluate(x_train, y_train, batch_size=batch_size, verbose=0) # 学習データに対するlossを計算
-	loss_train.append(loss)
-	loss, accuracy = model.evaluate(x_test, y_test, batch_size=batch_size, verbose=0) # 検証データに対するlossを計算
-	loss_test.append(loss)
+    # 学習状況を確認
+    loss, accuracy = model.evaluate(x_train, y_train, batch_size=batch_size, verbose=0) # 学習データに対するlossを計算
+    loss_train.append(loss)
+    loss, accuracy = model.evaluate(x_test, y_test, batch_size=batch_size, verbose=0) # 検証データに対するlossを計算
+    loss_test.append(loss)
 
 # 学習結果を保存
 print(model.summary()) # レイヤー情報を表示(上で表示させると流れるので)

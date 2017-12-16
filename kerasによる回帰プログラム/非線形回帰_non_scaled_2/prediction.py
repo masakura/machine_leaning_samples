@@ -9,14 +9,14 @@ from keras.models import model_from_json
 
 
 def ndarray2str(val):
-	""" ndarray型の変数を文字列に変換する
-	val: ndarray 2次元配列を仮定
-	"""
-	out = []
-	for x in val:
-		temp = [str(y) for y in x]
-		out.append(",".join(temp))
-	return "\n".join(out)
+    """ ndarray型の変数を文字列に変換する
+    val: ndarray 2次元配列を仮定
+    """
+    out = []
+    for x in val:
+        temp = [str(y) for y in x]
+        out.append(",".join(temp))
+    return "\n".join(out)
 
 # データの読み込み
 df = pandas.read_csv("prediction_data.csv")
@@ -29,7 +29,7 @@ model.load_weights('param.hdf5')
 
 # テスト用のデータを保存
 with open("prediction_result.csv", "w") as fw:
-	prediciton_data = model.predict(x)
-	print(prediciton_data)
-	fw.write(ndarray2str(prediciton_data))
+    prediciton_data = model.predict(x)
+    print(prediciton_data)
+    fw.write(ndarray2str(prediciton_data))
 
