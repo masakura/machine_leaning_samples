@@ -8,9 +8,9 @@ import pandas
  
 argvs = sys.argv  # コマンドライン引数を格納したリストの取得
 if len(argvs) < 3:
-	print("以下の様に、引数で処理対象と分割比を指定して下さい")
-	print(">python data_split.py hoge.csv 0.8")
-	exit()
+    print("以下の様に、引数で処理対象と分割比を指定して下さい")
+    print(">python data_split.py hoge.csv 0.8")
+    exit()
 
 target = argvs[1]       # 分割対象のファイル名を取得
 ratio = float(argvs[2]) # 分割の割合
