@@ -23,7 +23,7 @@ result = clf.score(trainFeature, trainLabel) # 学習データに対する、適
 
 # 学習結果を保存
 with open('entry.pickle', 'wb') as f:
-	pickle.dump(clf, f)
+    pickle.dump(clf, f)
 
 # 1個だけテスト
 test = clf.predict([trainFeature[0]])
@@ -31,4 +31,4 @@ print(test)
 
 # 額数データに対する適合率
 print(result)
-print(clf.feature_importances_)	# 各特徴量に対する寄与度を求める
+print(clf.feature_importances_)    # 各特徴量に対する寄与度を求める

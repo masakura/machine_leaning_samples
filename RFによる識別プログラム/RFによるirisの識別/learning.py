@@ -14,7 +14,6 @@ import numpy as np
 # データの読み込み
 data = pandas.read_csv("iris_learning.csv")
 #print(data)
-s = len(data.columns) # 列数の取得
 x = (data.iloc[:, :-1]).values # transform to ndarray
 y = (data.iloc[:, -1:]).values
 y = np.ravel(y) # transform 2次元 to 1次元 ぽいこと
@@ -26,12 +25,12 @@ result = clf.score(x, y) # 学習データに対する、適合率
 
 # 学習済みの学習器を保存
 with open('entry.pickle', 'wb') as f:
-	pickle.dump(clf, f)
+    pickle.dump(clf, f)
 
 # 結果の確認
 test = clf.predict([x[0]]) # 1個だけテスト
 print(test)
 print(result) # 学習データに対する適合率
-print(clf.feature_importances_)	# 各特徴量に対する寄与度を求める
+print(clf.feature_importances_)    # 各特徴量に対する寄与度を求める
 
 
