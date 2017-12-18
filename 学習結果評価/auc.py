@@ -5,7 +5,6 @@
 # lisence: MIT
 import numpy as np
 import matplotlib.pyplot as plt
-%matplotlib inline
 
 
 def get_AUC(correct_arr, predicted_arr):

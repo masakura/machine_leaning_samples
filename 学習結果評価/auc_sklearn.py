@@ -5,7 +5,8 @@
 # created: 2017-12-18
 # lisence: MIT
 import sklearn.metrics as mtr
-
+import numpy as np
+import matplotlib.pyplot as plt
                  
 def main():
     # 正解データを乱数で作る
